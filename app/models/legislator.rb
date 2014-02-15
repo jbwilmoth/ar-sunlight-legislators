@@ -18,12 +18,21 @@ class Legislator < ActiveRecord::Base
 
   end
 
+  def counted_states_order
+    total_result = Legislator.all
+    counted_states = Hash.new(0)
+    total_result.each do |legislator|
+      counted_states[legislator.state] += 1
+    end
+    counted_states.collect { |state, count| [state, count] }.sort { |a, b| b[1] <=> a[1] }
+  end
+
 end
 
 puts Legislator.list_by_state("TN")
-
-puts Legislator.list_by_gender("F")
-
+puts
+puts Legislator.list_by_gender("M")
+puts
 puts Legislator.list_active
-
+puts
 puts Legislator.total
