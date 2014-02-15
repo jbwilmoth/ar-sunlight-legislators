@@ -3,7 +3,18 @@ require_relative '../../db/config'
 class Legislator < ActiveRecord::Base
 
   def self.list_by_state(state)
+    sorted_states = counted_states_order
+    list_states = ""
+    sorted_states.each do |state_count|
+      list_states << list_by_state(state_count)
+    end
+    list_states.strip
+  end
 
+  def list_by_state
+    senators_by_state = Legislator.where("state = ? AND title = ?", state_count[0], 'Sen')
+    reps_by_state     = Legislator.where("state = ? AND title = ?", state_count[0], 'Rep')
+    if senators_by_state.count > 0 ||
   end
 
   def self.list_by_gender(gender)
@@ -18,7 +29,7 @@ class Legislator < ActiveRecord::Base
 
   end
 
-  def counted_states_order
+  def self.counted_states_order
     total_result = Legislator.all
     counted_states = Hash.new(0)
     total_result.each do |legislator|
