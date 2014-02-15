@@ -1,16 +1,17 @@
 require 'csv'
-require_relative '../app/models/congress'
+require_relative '../app/models/legislator'
 
 class SunlightLegislatorsImporter
   def self.import(filename)
     csv = CSV.new(File.open(filename), :headers => true)
     csv.each do |row|
+      attributes = Hash.new
       row.each do |field, value|
-        if Congress.column_names.include?(field)
+        if Legislator.column_names.include?(field)
           attributes.merge!( { field.to_sym => value } )
         end
       end
-      Congress.create(attributes)
+      Legislator.create(attributes)
     end
   end
 end
