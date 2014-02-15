@@ -2,28 +2,28 @@ require_relative '../../db/config'
 
 class Legislator < ActiveRecord::Base
 
-  def self.find_reps_by_state(state)
+  def self.list_by_state(state)
 
   end
 
-  def self.find_senators_by_state(state)
+  def self.list_by_gender(gender)
 
   end
 
-  def self.list_senators_by_party(party)
+  def self.list_active
 
   end
 
-  def self.list_reps_by_party(party)
-
-  end
-
-  def find_legislator(legislator)
-
-  end
-
-  def active_legislator?(legislator)
+  def self.total
 
   end
 
 end
+
+puts Legislator.list_by_state("TN")
+
+puts Legislator.list_by_gender("F")
+
+puts Legislator.list_active
+
+puts Legislator.total
