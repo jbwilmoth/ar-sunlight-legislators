@@ -18,4 +18,12 @@ class Congress < ActiveRecord::Base
 
   end
 
+  def find_member(title, id)
+
+  end
+
+  def active_member?(member)
+
+  end
+
 end
